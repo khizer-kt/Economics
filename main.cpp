@@ -1,6 +1,9 @@
+#pragma once
 #include <iostream>
 #include "LinkedList.h"
 #include "parser.h"
+using namespace std;
+
 int main() {
     // Create an empty linked list
     LinkedList list;
