@@ -1,29 +1,30 @@
 #pragma once
 #include "LinkedList.h"
+using namespace std;
 
 void parse_all(LinkedList& list) {
-    std::string fname;
-    std::cout << "Enter the file name: ";
-    std::cin >> fname;
+    string fname;
+    cout << "Enter the file name: ";
+    cin >> fname;
 
-    std::vector<std::vector<std::string>> content;
-    std::vector<std::string> row;
-    std::string line, word;
+    vector<vector<string>> content;
+    vector<string> row;
+    string line, word;
 
-    std::fstream file(fname, std::ios::in);
+    fstream file(fname, ios::in);
     if (file.is_open()) {
-        while (std::getline(file, line)) {
+        while (getline(file, line)) {
             row.clear();
 
-            std::stringstream str(line);
+            stringstream str(line);
 
-            while (std::getline(str, word, ','))
+            while (getline(str, word, ','))
                 row.push_back(word);
             content.push_back(row);
         }
     }
     else {
-        std::cout << "Could not open the file\n";
+        cout << "Could not open the file\n";
     }
 
     // Use the append function to insert the data read from the file into the list
@@ -33,5 +34,3 @@ void parse_all(LinkedList& list) {
         }
     }
 }
-
-
