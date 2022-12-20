@@ -1,11 +1,12 @@
 # Economics
 ---
-**Commit#2**  
+**Stage:2**  
 10:14 PM 20th December  
 Contributors:  
-- [Khizer](https://github.com/khizer-kt)  
-- [Wasam](https://github.com/wasam-khan)  
-- [Abdul Rehman](https://github.com/ara8256)  
+- [Khizer](https://github.com/khizer-kt)
+- [Wasam](https://github.com/wasam-khan)
+- [Abdul Rehman](https://github.com/ara8256)
+  
 Basic Functionalities that we MAY use in this project:  
 - Searching for an item, using a hashtable or binary search tree  
 - Sorting items by price or name (quicksort or mergesort)  
@@ -18,7 +19,7 @@ Basic Functionalities that we MAY use in this project:
 - Implementing a feature that allows users to filter and sort the items in the dataset: We can use a data structure such as a priority queue to store and prioritize the items in the dataset based on various criteria (e.g., price, quantity)  
 
 ---
-**Commit#1**  
+**Stage:1**  
 1:24 AM 16th December Code commited by [Khizer](https://github.com/khizer-kt)  
 - For now we are getting the data from CSV file into LinkedList and each and every data field (cell) is treated as a separate Node  
 ---
