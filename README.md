@@ -17,6 +17,7 @@ Basic Functionalities that we MAY use in this project:
 - Generating reports on sales and customer data: We can use a data structure such as a binary search tree to store and organize the sales data by various criteria (e.g., customer ID, fiscal year, category)  
 - Implementing a loyalty program: We can use a data structure such as a heap to store and prioritize customer data based on their "customer since" date  
 - Implementing a feature that allows users to filter and sort the items in the dataset: We can use a data structure such as a priority queue to store and prioritize the items in the dataset based on various criteria (e.g., price, quantity)  
+- abcd
 
 ---
 **Stage:1**  
