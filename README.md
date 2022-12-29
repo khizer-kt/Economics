@@ -1,4 +1,10 @@
 # Economics
+---  
+**Stage:3**  
+8:26 PM 29th December  
+AVL Files Added  
+Parser File Upgraded to Parse data into AVL  
+
 ---
 **Stage:2**  
 10:14 PM 20th December  
