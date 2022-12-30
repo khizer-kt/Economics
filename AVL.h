@@ -32,6 +32,9 @@ public:
 	void AVLcaller(node* root1, node* parent);
 	void AVLconverter(node* root2, node* parent);
 	void avlCSVparser(string filename);
+	node* getRoot();
+	void test(node* root);
+	void avlCSVparser_2(string filename);
 };
 tree::tree() { //CONSTRUCTOR
 	loc = NULL;
@@ -65,29 +68,37 @@ If loc->data is greater than value,
 it means that the value being searched for is somewhere in the left subtree of the current node, so the search should continue in that subtree. 
 Otherwise, the value is somewhere in the right subtree, and the search should continue in that subtree.*/
 void tree::insert(string value) {
+	//cout << "Before Search called" << endl;
 	search(value);
+	//cout << "Search called" << endl;
 	if (loc == NULL) {
+		//cout << "loc is null" << endl;
 		node* nn = new node();
 		nn->data = value;
 		if (ploc == NULL && root == NULL) { //checks if tree is empty
+			//cout << "Root and Ploc are null";
 			root = nn;
+			//cout << "Inner if" << endl;
+			//cout << root->data;
 		}
 		else {
 			if (value < ploc->data) {
 				ploc->Lchild = nn;
+				//cout << "Caller";
+				//cout << ploc->data;
 			}
 			else {
+				//cout << "Caller2";
 				ploc->Rchild = nn;
+				//cout << ploc->data;
 			}
 		}
 	}
-	else {
-		//cout << "The Value is Already Present in the Tree" << endl;
-	}
 }
 void tree::preorder(node* root) {
+	//cout << "Test" << endl;
 	if (root != NULL) {
-		cout << root->data << " ";
+		cout << root->data << " \n";
 		preorder(root->Lchild);
 		preorder(root->Rchild);
 	}
@@ -307,8 +318,32 @@ void tree::avlCSVparser(string filename) {
 	while (getline(file, line)) {
 		stringstream ss(line);
 		string value_;
-		while (getline(ss, value_,a)) {
+		string row_value;
+		while (getline(ss, value_, a)) {
+			row_value += value_ + " ";
+		}
+		insert(row_value);
+	}
+}
+
+void tree::avlCSVparser_2(string filename) {
+	ifstream file(filename);
+	string line;
+	char a = ',';
+	while (getline(file, line)) {
+		stringstream ss(line);
+		string value_;
+		while (getline(ss, value_, a)) {
 			insert(value_);
 		}
 	}
+}
+
+node* tree::getRoot() {
+	//cout << "Called" << endl;
+	return root;
+}
+void tree::test(node* root) {
+	cout << root->data ;
+	//cout << "After root ";
 }
