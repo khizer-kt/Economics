@@ -35,6 +35,7 @@ public:
 	node* getRoot();
 	void test(node* root);
 	void avlCSVparser_2(string filename);
+	bool search2(string value);
 };
 tree::tree() { //CONSTRUCTOR
 	loc = NULL;
@@ -59,6 +60,22 @@ void tree::search(string value) {
 		}
 	}
 }
+bool tree::search2(string value) { //basically tells us whether or not a val is found
+	ploc = NULL;
+	loc = root;
+	while (loc != NULL && loc->data != value) {
+		if (loc->data > value) {
+			ploc = loc;
+			loc = loc->Lchild;
+		}
+		else {
+			ploc = loc;
+			loc = loc->Rchild;
+		}
+	}
+	return (loc != NULL);  // return true if value was found, false otherwise
+}
+
  /*
   ploc is used to store the address of the parent node of the current node being searched,
   loc is used to store the address of the current node being searched.
