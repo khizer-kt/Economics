@@ -1,4 +1,5 @@
 #pragma once
+#pragma once
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -64,6 +65,20 @@ public:
             tail->next = new_node;
             // Then set the tail of the list to the new node
             tail = new_node;
+        }
+    }
+    void CSVparser(string filename) {
+        ifstream file(filename);
+        string line;
+        char a = ',';
+        while (getline(file, line)) {
+            stringstream ss(line);
+            string value_;
+            string row_value;
+            while (getline(ss, value_, a)) {
+                row_value += value_ + " ";
+            }
+            append(row_value);
         }
     }
 };
