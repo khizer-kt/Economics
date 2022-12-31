@@ -1,4 +1,5 @@
 #pragma once
+//KT
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -6,12 +7,27 @@
 using namespace std;
 int const capacity = 600000;
 int arr[capacity];
-int hash(string filename) { //get the locations for storage
-	string x = get(filename);
-	int y = stoi(x);
-	return y % capacity;
+
+
+
+class Hash{
+public:
+	int hash_(string filename);
+	string get_(string filename);
+	bool isnum(string s);
+	void insert(int arr[], string filename);
+};
+void Hash::insert(int arr[], string filename) {
+	int loc;
+	loc = hash_(filename);
+	string element = get_(filename);
+	arr[loc] = stoi(element);
 }
-string get(string filename) {
+bool Hash::isnum(std::string s) { //num checker
+	//returns true when num
+	return std::all_of(s.begin(), s.end(), ::isdigit);
+}
+string Hash::get_(string filename) {
 	ifstream file(filename);
 	string line, column;
 	char a = ',';
@@ -28,15 +44,13 @@ string get(string filename) {
 			column = to_string(column_temp);
 		}
 		column_temp++;
-		return column;
 		
+		return column;
+
 	}
 }
-bool isnum(std::string s) { //num checker
-	//returns true when num
-	return std::all_of(s.begin(), s.end(), ::isdigit);
-}
-void insert(int arr[], string filename) {
-	int loc;
-	loc = hash(filename)
+int Hash::hash_(string filename) { //get the locations for storage
+	string x = get_(filename);
+	int y = stoi(x);
+	return y % capacity;
 }
