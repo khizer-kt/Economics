@@ -26,7 +26,6 @@ void Hash__::insert(string filename) {
 	string element = function(filename);
 	arr[loc] = stoi(element);
 	cout << stoi(element);
-	int size = sizeof(arr) / sizeof(arr[0]);
 	//cout << "Call complete";
 }
 bool Hash__::isnum(std::string s) { //num checker
