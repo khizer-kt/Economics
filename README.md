@@ -1,4 +1,12 @@
 # Economics
+---
+**Stage:4**  
+5:05 AM 31st December  
+Winding up the work from last two days  
+- Fixed the AVL code  
+- Included [hash.h](https://github.com/khizer-kt/Economics/blob/main/hash.h)  
+This file is creating a hash function by getting the item_id from the CSV file then converting that id into an integer, passing it to a hash function that will give its location.  
+
 ---  
 **Stage:3**  
 8:26 PM 29th December  
