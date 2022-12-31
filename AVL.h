@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <algorithm>
 #include <string>
@@ -40,7 +41,7 @@ public:
 tree::tree() { //CONSTRUCTOR
 	loc = NULL;
 	ploc = NULL;
-	root = NULL; 
+	root = NULL;
 	//this will ensure that every time a new tree is created the above attributes are set to NULL
 }
 bool tree::isEmpty() {
@@ -76,14 +77,14 @@ bool tree::search2(string value) { //basically tells us whether or not a val is 
 	return (loc != NULL);  // return true if value was found, false otherwise
 }
 
- /*
-  ploc is used to store the address of the parent node of the current node being searched,
-  loc is used to store the address of the current node being searched.
-  */
-/*In this code, the comparison is being used to determine whether to continue searching in the left or right subtree of the current node.
-If loc->data is greater than value,
-it means that the value being searched for is somewhere in the left subtree of the current node, so the search should continue in that subtree. 
-Otherwise, the value is somewhere in the right subtree, and the search should continue in that subtree.*/
+/*
+ ploc is used to store the address of the parent node of the current node being searched,
+ loc is used to store the address of the current node being searched.
+ */
+ /*In this code, the comparison is being used to determine whether to continue searching in the left or right subtree of the current node.
+ If loc->data is greater than value,
+ it means that the value being searched for is somewhere in the left subtree of the current node, so the search should continue in that subtree.
+ Otherwise, the value is somewhere in the right subtree, and the search should continue in that subtree.*/
 void tree::insert(string value) {
 	//cout << "Before Search called" << endl;
 	search(value);
@@ -194,7 +195,7 @@ void tree::DeleteNode(string value) {
 				root = loc->Lchild;
 			}
 		}
-		else if (loc->Rchild==NULL && loc->Lchild==NULL){
+		else if (loc->Rchild == NULL && loc->Lchild == NULL) {
 			if (ploc) {
 				if (loc == ploc->Lchild) {
 					ploc->Lchild = loc->Lchild;
@@ -345,22 +346,34 @@ void tree::avlCSVparser(string filename) {
 
 void tree::avlCSVparser_2(string filename) {
 	ifstream file(filename);
-	string line;
+	string line, firstColumn;
 	char a = ',';
 	while (getline(file, line)) {
+		// create a stringstream from the line
 		stringstream ss(line);
-		string value_;
-		while (getline(ss, value_, a)) {
-			insert(value_);
-		}
+
+		// get the first value before the comma and store it in firstColumn
+		getline(ss, firstColumn, a);
+
+		// insert the firstColumn value into the tree
+		insert(firstColumn);
 	}
 }
+
 
 node* tree::getRoot() {
 	//cout << "Called" << endl;
 	return root;
 }
 void tree::test(node* root) {
-	cout << root->data ;
+	cout << root->data;
 	//cout << "After root ";
 }
+
+
+
+//tree a;
+//a.avlCSVparser("ecom.csv");
+//a.insert("Value i inserted");
+//node* root = a.getRoot();
+//a.preorder(root);
