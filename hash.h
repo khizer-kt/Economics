@@ -4,7 +4,7 @@
 #include <sstream>
 
 using namespace std;
-
+const int TABLE_SIZE = 584530;
 const int MAX_VALUES = 584530;  // Maximum number of values to store
 
 int* converter() {
@@ -53,4 +53,66 @@ int* converter() {
 //    }
 //
 //    return 0;
+//}
+int* hash_() {
+    int* values = converter();  // Get the values from the CSV file
+
+    // Create the hash table
+
+    int* hashTable = new int[TABLE_SIZE];
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        hashTable[i] = -1;  // Initialize the table to -1
+    }
+
+    // Compute the hash values and insert them into the table
+    for (int i = 0; i < MAX_VALUES; i++) {
+        int hashValue = values[i] % TABLE_SIZE;  // Compute the hash value
+
+        // Check for a collision
+        if (hashTable[hashValue] != -1) {
+            // Linear probing: search for the next available slot
+            int probe = hashValue + 1;
+            while (hashTable[probe] != -1) {
+                probe = (probe + 1) % TABLE_SIZE;
+            }
+            hashValue = probe;
+        }
+
+        // Insert the value into the table
+        hashTable[hashValue] = values[i];
+    }
+
+    return hashTable;
+}
+//testing needed on hash search
+int search(int value, int* hashTable) {
+    cout << "Searching for value " << value << " in the hash table." << endl;
+
+    int hashValue = value % TABLE_SIZE;  // Compute the hash value
+
+    // Search for the value in the table
+    int probe = hashValue;
+    while (hashTable[probe] != value && hashTable[probe] != -1) {
+        probe = (probe + 1) % TABLE_SIZE;
+    }
+
+    if (hashTable[probe] == value) {
+        cout << "Value found at index " << probe << " in the table." << endl;
+        return probe;
+    }
+    else {
+        cout << "Value not found in the table." << endl;
+        return -1;
+    }
+}
+//code working for hashtable entries just a little slower
+//int main() {
+//
+//    int* hashTable = hash_();
+//
+//    // Print the values in the hash table
+//    for (int i = 0; i < TABLE_SIZE; i++) {
+//        cout << hashTable[i] << endl;
+//    }
+//
 //}
