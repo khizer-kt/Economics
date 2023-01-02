@@ -1,9 +1,18 @@
 # Economics
 ---
 **Ending**  
+
 [Main](https://github.com/khizer-kt/Economics/tree/main/work) contains all the running code for the project.  
 [Scraps](https://github.com/khizer-kt/Economics/tree/main/scrap) unused code.  
+Main:  
 
+- [Quicksort](https://github.com/khizer-kt/Economics/blob/main/work/sort.h)  
+- [FiscalYearDetails](https://github.com/khizer-kt/Economics/blob/main/work/main.h)  
+- [CustomerShopCart](https://github.com/khizer-kt/Economics/blob/main/work/main.h)  
+- [ItemIdSearch](https://github.com/khizer-kt/Economics/blob/main/work/main.h)  
+- [Hashing](https://github.com/khizer-kt/Economics/blob/main/work/main.h)  
+- [AVL](https://github.com/khizer-kt/Economics/blob/main/work/main.h)  
+- [LinkedList](https://github.com/khizer-kt/Economics/blob/main/work/main.h)
 
 ---
 
