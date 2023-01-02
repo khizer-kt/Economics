@@ -17,6 +17,12 @@ Main:
 - [DataForSorting](https://github.com/khizer-kt/Economics/blob/main/work/test3.csv)
 - [SortedData](https://github.com/khizer-kt/Economics/blob/main/work/test4.csv)  
 
+---   
+**Time Complexities: **  
+- **QuickSort O(n*log(n))** The quicksort algorithm divides the array into two halves and then recursively sorts each half. This means that the time complexity is proportional to the number of elements in the array multiplied by the number of times the array is divided (log n).  
+- **SearchItem(AVL) O(log n)** Each time the function searches a node, it compares the search key (in this case, the id string) with the key of the current node. If the search key is smaller, it will search the left subtree, and if it is larger, it will search the right subtree. This process continues until the search key is found or it is determined that the key is not present in the tree.
+
+
 ---
 Run main.cpp    
   
