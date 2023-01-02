@@ -113,7 +113,7 @@ int main() {
     file2.close();
 
     return 0;
-    quicksort(items, 0, num_items - 1, compare_items);
+   // quicksort(items, 0, num_items - 1, compare_items);
 }
 
 
