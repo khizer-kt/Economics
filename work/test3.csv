@@ -1,0 +1,20 @@
+Item Id,Status,Customer ID,SKU,Price,Quantity,Grand Total,Created at,Category,Sales Comission Code,Discount amount,Payment Method,Fiscal Year,BI Status,MV,Customer Since
+211131,complete,1,kreations_YI 06-L,1950,1,1950,07-01-16,Women's Fashion,\N,0,cod,FY17,#REF!,1950,2016-7
+211133,canceled,2,kcc_Buy 2 Frey Air Freshener & Get 1 Kasual Body Spray Free,240,1,240,07-01-16,Beauty & Grooming,\N,0,cod,FY17,Gross,240,2016-7
+324257,canceled,2,RS_Habshi Halwa Tin,270,1,270,11/25/2016,Soghaat,\N,0,jazzvoucher,FY17,Gross,270,2016-7
+211134,canceled,3,Ego_UP0017-999-MR0,2450,1,2450,07-01-16,Women's Fashion,\N,0,cod,FY17,Gross,2450,2016-7
+473369,complete,3,BT_BT-422,530,1,1245,5/19/2017,Men's Fashion,\N,0,cod,FY17,Net,530,2016-7
+473370,complete,3,ALHAMRA_US-0961-K,299,1,1245,5/19/2017,Men's Fashion,\N,0,cod,FY17,Net,299,2016-7
+473371,complete,3,e-seller_7,66,1,1245,5/19/2017,Mobiles & Tablets,\N,0,cod,FY17,Net,66,2016-7
+473372,complete,3,BD_BIG DEAL_16,350,1,1245,5/19/2017,Mobiles & Tablets,\N,0,cod,FY17,Net,350,2016-7
+211135,complete,4,kcc_krone deal,360,1,60,07-01-16,Beauty & Grooming,R-FSD-52352,300,cod,FY17,Net,360,2016-7
+212570,complete,4,kcc_krone deal,360,1,160,07-04-16,Beauty & Grooming,R-FSD-52352,200,cod,FY17,Net,360,2016-7
+214138,complete,4,PC_1P SP CRW-006,150,1,150,7/13/2016,Men's Fashion,R-FSD-52352,0,cod,FY17,Net,150,2016-7
+215020,complete,4,Karak_Honey 1 Kg,1275,1,1275,7/15/2016,Superstore,R-FSD-52352,0,cod,FY17,Net,1275,2016-7
+216369,complete,4,mau_117018 Hedonic Velvet Blush,340,2,680,7/19/2016,Beauty & Grooming,R-FSD-52352,0,cod,FY17,Net,680,2016-7
+216371,complete,4,mau_117021 Spry Velvet Blush,340,1,340,7/19/2016,Beauty & Grooming,R-FSD-52352,0,cod,FY17,Net,340,2016-7
+216372,complete,4,RS_Soan Papri-500gm,300,4,1200,7/19/2016,Soghaat,R-FSD-52352,0,cod,FY17,Net,1200,2016-7
+217052,refund,4,dawlance_Microwave Oven MD-7 - 20 litres,6055,1,8975,7/21/2016,Appliances,R-FSD-52352,0,cod,FY17,Valid,6055,2016-7
+217053,refund,4,jackpot_JP-7777,1230,1,8975,7/21/2016,Appliances,R-FSD-52352,0,cod,FY17,Valid,1230,2016-7
+217054,refund,4,mm_AG-1038c,1690,1,8975,7/21/2016,Appliances,R-FSD-52352,0,cod,FY17,Valid,1690,2016-7
+218687,order_refunded,4,Karak_Honey 1 Kg,1500,5,7275,7/26/2016,Superstore,R-FSD-52352,0,cod,FY17,Valid,7500,2016-7
