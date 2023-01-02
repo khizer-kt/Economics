@@ -1,8 +1,8 @@
-#pragma once
 #include <fstream>
 #include <sstream>
 #include <string>
 #include <iostream>
+#include <fstream>
 using namespace std;
 struct Item23 {
     string id;
@@ -54,12 +54,12 @@ void quicksort(Item23* items, int left, int right, bool (*compare)(const Item23&
 }
 
 int main() {
-    const int MAX_ITEMS = 10000;
+    const int MAX_ITEMS = 20;
     Item23 items[MAX_ITEMS];
     int num_items = 0;
 
     // Read items from CSV file
-    std::ifstream file("test.csv");
+    std::ifstream file("test3.csv");
     std::string line;
     getline(file, line); // skip first line
     while (num_items < MAX_ITEMS && getline(file, line)) {
@@ -100,7 +100,11 @@ int main() {
     quicksort(items, 0, num_items - 1, compare_items);
 
     // Write sorted items to CSV file
-    std::ofstream file2("test2.csv");
+    std::ofstream file2("test4.csv");
+    if (!file2.is_open()) {
+        std::cerr << "Error: Unable to open output file" << std::endl;
+        return 1;
+    }
     file2 << "Item Id,Status,Customer ID,SKU,Price,Quantity,Grand Total,Created at,Category,Sales Comission Code,Discount amount,Payment Method,Fiscal Year,BI Status,MV,Customer Since" << std::endl;
     for (int i = 0; i < num_items; i++) {
         const Item23& item = items[i];
@@ -109,10 +113,7 @@ int main() {
     file2.close();
 
     return 0;
+    quicksort(items, 0, num_items - 1, compare_items);
 }
 
 
-
-
-
-//quicksort(items, 0, num_items - 1, compare_items);
