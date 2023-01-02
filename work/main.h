@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <fstream>
 #include <sstream>
+#define _CRT_SECURE_NO_WARNINGS
+
 using namespace std;
 const int TableSize = 10000;
 class Item {
@@ -112,12 +114,12 @@ public:
             total_price += stoi(node->data.price);
         }
         getTotalPriceForCustomer(node->right, customer_id, total_price);
-    }
+    } // O(n)
 
     AVL() {
         root = nullptr;
     }
-    AVLNode* searchid(string id, AVLNode* node) {
+    AVLNode* searchid(string id, AVLNode* node) { //O(log n)
         //cout << "search called" << endl;
         if (node == nullptr || node->data.id == id) {
             return node;
@@ -131,67 +133,145 @@ public:
     void insert(Item data) {
         root = insert(root, data);
     }
+    void printALL(AVLNode* node) {
+        if (node == nullptr) {
+            return;
+        }
+        printALL(node->left);
+        cout << "ID: " << node->data.id << endl;
+        cout << "Status: " << node->data.status << endl;
+        cout << "Customer ID: " << node->data.customer_id << endl;
+        cout << "SKU: " << node->data.sku << endl;
+        cout << "Price: " << node->data.price << endl;
+        cout << "Quantity: " << node->data.quantity << endl;
+        cout << "Grand total: " << node->data.grand_total << endl;
+        cout << "Created at: " << node->data.created_at << endl;
+        cout << "Category: " << node->data.category << endl;
+        cout << "Sales comission code: " << node->data.sales_comission_code << endl;
+        cout << "Discount amount: " << node->data.discount_amount << endl;
+        cout << "Payment method: " << node->data.payment_method << endl;
+        cout << "Fiscal year: " << node->data.fiscal_year << endl;
+        cout << "BI status: " << node->data.bi_status << endl;
+        cout << "MV: " << node->data.mv << endl;
+        cout << "Customer since: " << node->data.customer_since << endl;
+        printALL(node->right);
+    } //inorder  O(n) coz inorder traversal
+    void PricebyCategory(AVLNode* node, std::string category, int& total_price) {
+        if (node == nullptr) {
+            return;
+        }
+        PricebyCategory(node->left, category, total_price);
+        if (node->data.category == category) {
+            total_price += std::stoi(node->data.price) * std::stoi(node->data.quantity);
+        }
+        PricebyCategory(node->right, category, total_price);
+    }
+    int countOrdersInCategory(AVLNode* node, string category) {
+        if (node == nullptr) {
+            return 0;
+        }
+        int count = 0;
+        if (node->data.category == category) {
+            count = std::stoi(node->data.quantity);
+        }
+        return count + countOrdersInCategory(node->left, category) + countOrdersInCategory(node->right, category);
+    }
+    int getCustomerSince(AVLNode* node, std::string customer_id) {
+        if (node == nullptr) {
+            return -1;
+        }
+        if (node->data.customer_id == customer_id) {
+            time_t current_time;
+            time(&current_time);
+            tm time_info;
+            localtime_s(&time_info, &current_time);
+            int current_year = time_info.tm_year + 1900;
+            std::string customer_since_str = node->data.customer_since;
+            int customer_since_year;
+            stringstream s(customer_since_str);
+            s >> customer_since_year;
+            return current_year - customer_since_year;
+        }
+        int result = getCustomerSince(node->left, customer_id);
+        if (result != -1) {
+            return result;
+        }
+        return getCustomerSince(node->right, customer_id);
+    }
+    void countPaymentMethods(AVLNode* node,int& countcod, int& countjazzvoucher, int& countcustomercredit, int& countpayaxis, int& other) {
+        if (node == nullptr) {
+            return;
+        }
+        countPaymentMethods(node->left,countcod, countjazzvoucher, countcustomercredit, countpayaxis, other);
+        if (node->data.payment_method == "cod") {
+            countcod++;
+        }
+        else if (node->data.payment_method == "jazzvoucher") {
+            countjazzvoucher++;
+        }
+        else if (node->data.payment_method == "customercredit") {
+            countcustomercredit++;
+        }
+        else if (node->data.payment_method == "payaxis") {
+            countpayaxis++;
+        }
+        else {
+            other++;
+        }
+        countPaymentMethods(node->right, countcod, countjazzvoucher, countcustomercredit, countpayaxis, other);
+
+    }
+    void REVPaymentMethods(AVLNode* node,  int& cod_revenue, int& jazzvoucher_revenue, int& other_rev) {
+        if (node == nullptr) {
+            return;
+        }
+        REVPaymentMethods(node->left, cod_revenue, jazzvoucher_revenue, other_rev);
+        if (node->data.payment_method == "cod") {
+            int test;
+            stringstream ss(node->data.grand_total);
+            if (ss >> test) {
+                cod_revenue += stoi(node->data.grand_total);
+            }
+            else {
+                cod_revenue += 100;
+            }
+        }
+        else if (node->data.payment_method == "jazzvoucher") {
+            int test;
+            stringstream ss(node->data.grand_total);
+            if (ss >> test) {
+                jazzvoucher_revenue += stoi(node->data.grand_total);
+            }
+            else {
+                jazzvoucher_revenue += 100;
+            }
+        }
+        else {
+            int test;
+            stringstream ss(node->data.grand_total);
+            if (ss >> test) {
+                other_rev += stoi(node->data.grand_total);
+            }
+            else {
+                other_rev += 100;
+            }
+        }
+        REVPaymentMethods(node->right, cod_revenue, jazzvoucher_revenue, other_rev);
+    }
+
+
+
+    //int revenueForYear(AVLNode* node, std::string fiscal_year) {
+    //    if (node == nullptr) {
+    //        return 0;
+    //    }
+    //    int revenue = 0;
+    //    if (node->data.fiscal_year == fiscal_year) {
+    //        revenue += std::stoi(node->data.price) * std::stoi(node->data.quantity);
+    //    }
+    //    return revenue + revenueForYear(node->left, fiscal_year) + revenueForYear(node->right, fiscal_year);
+    //}
 };
-
-//int main() {
-//    AVL avl;
-//
-//    // Read items from CSV file
-//    ifstream file("items.csv");
-//    string line;
-//    getline(file, line); // skip first line
-//    while (getline(file, line)) {
-//        stringstream ss(line);
-//        Item item;
-//        getline(ss, item.id, ',');
-//        getline(ss, item.status, ',');
-//        getline(ss, item.customer_id, ',');
-//        getline(ss, item.sku, ',');
-//        getline(ss, item.price, ',');
-//        getline(ss, item.quantity, ',');
-//        getline(ss, item.grand_total, ',');
-//        getline(ss, item.created_at, ',');
-//        getline(ss, item.category, ',');
-//        getline(ss, item.sales_comission_code, ',');
-//        getline(ss, item.discount_amount, ',');
-//        getline(ss, item.payment_method, ',');
-//        getline(ss, item.fiscal_year, ',');
-//        getline(ss, item.bi_status, ',');
-//        getline(ss, item.mv, ',');
-//        getline(ss, item.customer_since, ',');
-//        avl.insert(item);
-//    }
-//    file.close();
-//
-//    // Search for item with given ID
-//    string id = "211131";
-//    AVLNode* result = avl.search(id, avl.getRoot());
-//    if (result != nullptr) {
-//        cout << "Item found:" << endl;
-//        cout << "ID: " << result->data.id << endl;
-//        cout << "Status: " << result->data.status << endl;
-//        cout << "Customer ID: " << result->data.customer_id << endl;
-//        cout << "SKU: " << result->data.sku << endl;
-//        cout << "Price: " << result->data.price << endl;
-//        cout << "Quantity: " << result->data.quantity << endl;
-//        cout << "Grand Total: " << result->data.grand_total << endl;
-//        cout << "Created at: " << result->data.created_at << endl;
-//        cout << "Category: " << result->data.category << endl;
-//        cout << "Sales Commission Code: " << result->data.sales_comission_code << endl;
-//        cout << "Discount Amount: " << result->data.discount_amount << endl;
-//        cout << "Payment Method: " << result->data.payment_method << endl;
-//        cout << "Fiscal Year: " << result->data.fiscal_year << endl;
-//        cout << "BI Status: " << result->data.bi_status << endl;
-//        cout << "MV: " << result->data.mv << endl;
-//        cout << "Customer Since: " << result->data.customer_since << endl;
-//    }
-//    else {
-//        cout << "Item not found" << endl;
-//    }
-//    return 0;
-//}
-
-
 class ListNode {
 public:
     AVLNode* data;
@@ -237,5 +317,4 @@ LinkedList searchByCustomerId(string customerId, AVLNode* node) {
     }
     return leftResult;
 }
-
 
