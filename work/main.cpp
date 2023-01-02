@@ -1,6 +1,7 @@
 #include "main.h"
 #include <cctype>
 #include "hashmap.h"
+
 int main() {
     AVL avl;
     HashTable h__;
@@ -31,6 +32,7 @@ int main() {
         getline(ss, item.grand_total, ',');
         getline(ss, item.created_at, ',');
         getline(ss, item.category, ',');
+        string category = item.category;
         getline(ss, item.sales_comission_code, ',');
         getline(ss, item.discount_amount, ',');
         getline(ss, item.payment_method, ',');
@@ -45,8 +47,17 @@ int main() {
     }
     file.close();
     string choice;
-    cout << "Choose From the Functions: \n\t(i) Search Using Order Id (AVL) \n\t(c) Search Using Customer Id (LinkedList) \n\t(p) Get the total Price for a single Customer" << endl;
-    cout << "\t(h) See Sales in a Fiscal Year using HashTable: " << endl;
+    cout << "Choose From the Functions: " << endl;
+    cout << "\t(i) Search Using Order Id(AVL)" << endl;
+    cout << "\t(cp) Check Price by category of items" << endl; 
+    cout << "\t(pa) Details of all the orders" << endl;
+    cout << "\t(c) Search Using Customer Id(LinkedList)" << endl; 
+    cout <<"\t(p) Get the total Price for a single Customer" << endl;
+    cout << "\t(h) See Revenue made in a Fiscal Year using HashTable" << endl;
+    cout << "\t(ic) Check Number of orders in each Category" << endl;
+    cout << "\t(ct) Check Customer Since" << endl;
+    cout << "\t(pm) Check Payment Methods" << endl;
+    cout << "\t(rpm) Check Revenue Against Each Payment Method" << endl;
     cin >> choice;
     if (choice == "i") {
         // Search for item with given ID
@@ -124,8 +135,58 @@ int main() {
         int saless = h__.findTotalSalesForFiscalYear(FY);
         cout << "Total Sales for Fiscal Year " << FY << " were: " << saless;
     }
+    else if (choice == "pa") {
+        cout << "The Details of the Data Set are: ";
+        avl.printALL(avl.getRoot());
+    }
+    else if (choice == "cp") {
+        string cate;
+        cout << "Which Category You want to check: " << endl;
+        cin >> cate;
+        int tp = 0;
+        int total_price = 0;
+        avl.PricebyCategory(avl.getRoot(), cate, total_price);
+        cout << "Total price for category: " << total_price << endl;
+
+    }
+    else if (choice == "ic") {
+        string cate;
+        cout << "Which Category Do You want to check: " << endl;
+        cin >> cate;
+        int count = avl.countOrdersInCategory(avl.getRoot(), cate);
+        cout << "Number of items in this category are: " << count << endl;
+    }
+    else if (choice == "ct") {
+        string cid;
+        cout << "Enter Customer Id to check: " << endl;
+        cin >> cid;
+        int years = avl.getCustomerSince(avl.getRoot(), cid);
+        if (years == -1) {
+            cout << "Customer not found." << endl;
+        }
+        else {
+            cout << "Customer has been a customer for " << years << " years." << endl;
+        }
+    }
+    else if (choice == "pm") {
+        int countcod = 0;
+        int countjazzvoucher = 0; 
+        int countcustomercredit = 0; 
+        int countpayaxis = 0;
+        int other = 0;
+        avl.countPaymentMethods(avl.getRoot(), countcod, countjazzvoucher, countcustomercredit, countpayaxis, other);
+        cout << "Number of Payments Made with COD: " << countcod << endl;
+        cout << "Number of Payments Made with Jazz Voucher: " << countjazzvoucher << endl;
+        cout << "Number of Payments Made with Customer Credit: " << countcustomercredit << endl;
+        cout << "Other Payment Methods Used Were: " << other << endl;
+    }
+    else if (choice == "rpm") {
+        int cod = 0;
+        int jazz = 0;
+        int other = 0;
+        avl.REVPaymentMethods(avl.getRoot(), cod, jazz, other);
+        cout << "Revenue Generated Using COD Payments: " << cod << endl;
+        cout << "Revenue Generated Using Jazz Voucher Payments: " << jazz << endl;
+        cout << "Revenue Generated Using Other Payment Options: " << other << endl;
+    }
 }
-
-
-
-
