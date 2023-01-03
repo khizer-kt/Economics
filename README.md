@@ -5,8 +5,9 @@
 [Main](https://github.com/khizer-kt/Economics/tree/main/work) contains all the running code for the project.  
 [Scraps](https://github.com/khizer-kt/Economics/tree/main/scrap) unused code.  
 
----   
-**Functions: **  
+---  
+
+**Functions**  
 Functions	Complexity
 1.	Searching based on order Id that uses AVL Trees	O (log n)
 2.	Check Price of items in a certain category using LinkedList.	O (n)
